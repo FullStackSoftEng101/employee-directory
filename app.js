@@ -1,6 +1,11 @@
 import express from "express";
 
-import employees, { getEmployee, getEmployees } from "#db/employees";
+import {
+  employees,
+  getEmployee,
+  getEmployees,
+  getRandomEmployee,
+} from "#db/employees";
 
 const app = express();
 export default app;
@@ -11,18 +16,23 @@ app.get("/", (request, response) => {
 });
 
 //GET /employees
-app.get("/", (res, req) => {
-  const data = getEmployees();
-  response.send(data);
+app.get("/employees", (request, response) => {
+  const employees = getEmployees();
+  response.send(employees);
+});
+
+app.get("/employees/random", (req, res) => {
+  const employee = getRandomEmployee();
+  res.send(employee);
 });
 
 //GET /employees/:id
-app.get("/employees/:id", (res, res) => {
+app.get("/employees/:id", (req, res) => {
   const { id } = req.params;
-  const data = getEmployee(+id);
+  const data = getEmployee(Number(id));
 
   if (!data) {
-    return res.statusCode(404).send("Employee not found");
+    return res.status(404).send("Employee not found");
   }
   res.send(data);
 });

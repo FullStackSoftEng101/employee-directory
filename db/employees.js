@@ -25,10 +25,8 @@ export function getEmployee(id) {
       break;
     }
   }
-  //expoort function getEmployee(id){}
-  if (!employee) {
-    return res.status(404).send("EMployee not found");
-  }
+  //return employees.find((e)=>e.id===id);
+
   return employee;
 }
 
