@@ -25,10 +25,16 @@ export function getEmployee(id) {
       break;
     }
   }
+  //expoort function getEmployee(id){}
   if (!employee) {
-    return (resizeBy, status(404).send("EMployee not found"));
+    return res.status(404).send("EMployee not found");
   }
   return employee;
 }
 
-export function getRandomEmployee() {}
+export function getRandomEmployee() {
+  const randomEmployee =
+    employees[Math.floor(Math.random() * employees.length)];
+
+  return randomEmployee;
+}
